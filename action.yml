@@ -15,18 +15,10 @@ runs:
     - name: Get more space
       uses: easimon/maximize-build-space@master
       with:
-        root-reserve-mb: 512
+        root-reserve-mb: 5120
         swap-size-mb: 1024
         remove-dotnet: 'true'
         remove-android: 'true'
-    - name: Create compressed file system
-      shell: bash
-      run: |
-        dd if=/dev/zero of=./build.img bs=1 count=0 seek=7G
-        mkfs.btrfs -M ./build.img
-        mkdir ./build
-        sudo mount -o defaults,noatime,compress=zstd ./build.img ./build
-        sudo chown $UID ./build
     - name: Checkout
       uses: actions/checkout@v3
       with:
@@ -68,7 +60,6 @@ runs:
         DESKTOP_ENVIRONMENT_CONFIG_NAME=${{ env.desktop-environment-config-name }} \
         DESKTOP_APPGROUPS_SELECTED="3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop" \
         COMPRESS_OUTPUTIMAGE=sha,gpg,xz
-        sudo btrfs fi usage .
     - name: Upload
       if: inputs.release-id != '' && inputs.github-token != ''
       uses: xresloader/upload-to-github-release@v1
