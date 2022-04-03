@@ -22,8 +22,7 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: amazingfate/build
-        ref: sid-package-fix
+        repository: armbian/build
         path: build
     - name: Set env
       shell: bash
