@@ -22,8 +22,8 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: amazingfate/build
-        ref: remove-gweather
+        repository: armbian/build
+        ref: master
         path: build
     - name: Set env
       shell: bash
