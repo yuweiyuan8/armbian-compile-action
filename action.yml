@@ -23,7 +23,7 @@ runs:
       uses: actions/checkout@v3
       with:
         repository: amazingfate/build
-        ref: jammy-packages
+        ref: fix-gweather
         path: build
     - name: Set env
       shell: bash
