@@ -22,8 +22,8 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: amazingfate/build
-        ref: fix-rk3568-vop
+        repository: armbian/build
+        ref: master
         path: build
     - name: Set env
       shell: bash
