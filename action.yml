@@ -22,8 +22,8 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: armbian/build
-        ref: master
+        repository: amazingfate/build
+        ref: fix-spi-uboot
         path: build
     - name: Set env
       shell: bash
