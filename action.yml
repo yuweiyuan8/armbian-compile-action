@@ -22,8 +22,8 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: armbian/build
-        ref: master
+        repository: amazingfate/build
+        ref: add-panfork-mesa
         path: build
     - name: Set env
       shell: bash
@@ -44,6 +44,17 @@ runs:
           echo "desktop-environment=gnome" >> $GITHUB_ENV
           echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
           echo "expert=yes" >> $GITHUB_ENV
+          if [ ${{ inputs.board }} == "rock-5b" ] || [ ${{ inputs.board }} == "h88k" ]
+          then
+            if [ ${{ inputs.branch }} == "legacy" ]
+            then
+              echo "desktop_appgroups_selected=\"browsers chat desktop_tools editors email internet multimedia office panfork-mesa programming remote_desktop\"" >> $GITHUB_ENV
+            else
+              echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
+            fi
+          else
+            echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
+          fi
         fi
     - name: Build
       shell: bash
@@ -67,7 +78,7 @@ runs:
         KERNEL_CONFIGURE=no \
         DESKTOP_ENVIRONMENT=${{ env.desktop-environment }} \
         DESKTOP_ENVIRONMENT_CONFIG_NAME=${{ env.desktop-environment-config-name }} \
-        DESKTOP_APPGROUPS_SELECTED="3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop" \
+        DESKTOP_APPGROUPS_SELECTED=${{ env.desktop_appgroups_selected }} \
         EXPERT=${{ env.expert }} \
         BOARD_FIRMWARE_INSTALL="-full" \
         COMPRESS_OUTPUTIMAGE=sha,gpg,xz
