@@ -69,6 +69,7 @@ runs:
         wget https://github.com/amazingfate/armbian-h88k-images/raw/master/h88k.csc -O config/boards/h88k.csc
         cp -r patch/u-boot/legacy/board_rock-5b patch/u-boot/legacy/board_h88k
         sed -i "s|# CONFIG_SENSORS_PWM_FAN is not set|CONFIG_SENSORS_PWM_FAN=y|g" config/kernel/linux-rockchip-rk3588-legacy.config
+        sed -i "s|ext4|fat|g" config/boards/rock-5b.wip
         sed -i "s|KERNELSOURCE='https://github.com/radxa/kernel'|KERNELSOURCE='https://github.com/friendlyarm/kernel-rockchip'|g" config/sources/families/rk35xx.conf
         sed -i "s|KERNELBRANCH='branch:stable-4.19-rock3'|KERNELBRANCH='branch:nanopi5-v5.10.y_opt'|g" config/sources/families/rk35xx.conf
         cd patch/kernel/ && rm rk35xx-legacy && mkdir -p archive/rk35xx-5.10 && ln -s archive/rk35xx-5.10 rk35xx-legacy && cd ../../
