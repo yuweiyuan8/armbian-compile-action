@@ -80,7 +80,7 @@ runs:
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/linux-rk35xx-legacy.config -O config/kernel/linux-rk35xx-legacy.config
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/h68k.conf -O config/boards/h68k.conf
         git status
-        docker_tag=$(cat VERSION|cut -d "-" -f1) && docker_tag_in_repo=${docker_tag:0:5} && docker pull ghcr.io/armbian/build:${docker_tag_in_repo}-amd64 && docker image tag ghcr.io/armbian/build:${docker_tag_in_repo}-amd64 armbian:$(cat VERSION)
+        docker_tag=$(cat VERSION|cut -d "-" -f1) && docker_tag_in_repo=latest-jammy && docker pull ghcr.io/armbian/build:${docker_tag_in_repo}-amd64 && docker image tag ghcr.io/armbian/build:${docker_tag_in_repo}-amd64 armbian:$(cat VERSION)
         ./compile.sh docker \
         BOARD=${{ inputs.board }} \
         BRANCH=${{ inputs.branch }} \
