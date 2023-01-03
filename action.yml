@@ -73,7 +73,7 @@ runs:
         sed -i "s|KERNELSOURCE='https://github.com/radxa/kernel'|KERNELSOURCE='https://github.com/friendlyarm/kernel-rockchip'|g" config/sources/families/rk35xx.conf
         sed -i "s|KERNELBRANCH='branch:stable-4.19-rock3'|KERNELBRANCH='branch:nanopi5-v5.10.y_opt'|g" config/sources/families/rk35xx.conf
         cd patch/kernel/ && rm rk35xx-legacy && mkdir -p archive/rk35xx-5.10 && ln -s archive/rk35xx-5.10 rk35xx-legacy && cd ../../
-        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-5.15.patch -O patch/kernel/archive/rk35xx-5.10/backport-5.15.patch
+        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-v6.0.16.patch -O patch/kernel/archive/rk35xx-5.10/backport-6.0.16.patch
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/board-add-h86k-makefile.patch -O patch/kernel/archive/rk35xx-5.10/board-add-h86k-makefile.patch
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/rk3568-h68k.dts -O arch/arm64/boot/dts/rockchip/rk3568-h68k.dts
         git diff --no-index --output=./patch/kernel/archive/rk35xx-5.10/board-dts-add-h68k.patch /dev/null arch/arm64/boot/dts/rockchip/rk3568-h68k.dts || ls -l ./patch/kernel/archive/rk35xx-5.10/board-dts-add-h68k.patch
