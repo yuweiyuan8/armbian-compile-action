@@ -111,6 +111,7 @@ runs:
         release_id: ${{ inputs.release-id }}
         file: "./build/output/images/*;./build/output/debs/linux-*.deb"
         draft: false
+        overwrite: true
     - name: Rollback release
       if: failure() && inputs.release-id != '' && inputs.github-token != ''
       uses: author/action-rollback@stable
