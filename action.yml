@@ -60,9 +60,6 @@ runs:
         cp -r patch/u-boot/legacy/board_rock-5b patch/u-boot/legacy/board_h88k
         sed -i "s|# CONFIG_SENSORS_PWM_FAN is not set|CONFIG_SENSORS_PWM_FAN=y|g" config/kernel/linux-rockchip-rk3588-legacy.config
         sed -i "s|ext4|fat|g" config/boards/rock-5b.wip
-        sed -i "s|KERNELSOURCE='https://github.com/radxa/kernel'|KERNELSOURCE='https://github.com/friendlyarm/kernel-rockchip'|g" config/sources/families/rk35xx.conf
-        sed -i "s|KERNELBRANCH='branch:stable-4.19-rock3'|KERNELBRANCH='branch:nanopi5-v5.10.y_opt'|g" config/sources/families/rk35xx.conf
-        cd patch/kernel/ && rm rk35xx-legacy && mkdir -p archive/rk35xx-5.10 && ln -s archive/rk35xx-5.10 rk35xx-legacy && cd ../../
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-v6.0.16.patch -O patch/kernel/archive/rk35xx-5.10/backport-6.0.16.patch
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/board-add-h6xk-makefile.patch -O patch/kernel/archive/rk35xx-5.10/board-add-h6xk-makefile.patch
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/rk3568-h6xk.dtsi -O arch/arm64/boot/dts/rockchip/rk3568-h6xk.dtsi
@@ -74,11 +71,9 @@ runs:
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/linux-rk35xx-legacy.config -O config/kernel/linux-rk35xx-legacy.config
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/h66k.conf -O config/boards/h66k.conf
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/h68k.conf -O config/boards/h68k.conf
-        sed -i "s|rk3568_ddr_1560MHz_v1.10.bin|rk3568_ddr_1560MHz_v1.13.bin|g" config/sources/families/include/rockchip64_common.inc
-        sed -i "s|rk3568_bl31_v1.28.elf|rk3568_bl31_v1.32.elf|g" config/sources/families/include/rockchip64_common.inc
         git status
-        docker_tag=$(cat VERSION|cut -d "-" -f1) && docker_tag_in_repo=latest-jammy && docker pull ghcr.io/armbian/build:${docker_tag_in_repo}-amd64 && docker image tag ghcr.io/armbian/build:${docker_tag_in_repo}-amd64 armbian:$(cat VERSION)
-        ./compile.sh docker \
+        docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
+        ./compile.sh \
         BOARD=${{ inputs.board }} \
         BRANCH=${{ inputs.branch }} \
         RELEASE=${{ env.release }} \
