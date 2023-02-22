@@ -61,16 +61,16 @@ runs:
         sed -i "s|# CONFIG_SENSORS_PWM_FAN is not set|CONFIG_SENSORS_PWM_FAN=y|g" config/kernel/linux-rockchip-rk3588-legacy.config
         sed -i "s|ext4|fat|g" config/boards/rock-5b.wip
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-v6.0.16.patch -O patch/kernel/archive/rk35xx-5.10/backport-6.0.16.patch
-        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/board-add-h6xk-makefile.patch -O patch/kernel/archive/rk35xx-5.10/board-add-h6xk-makefile.patch
-        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/rk3568-h6xk.dtsi -O arch/arm64/boot/dts/rockchip/rk3568-h6xk.dtsi
-        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/rk3568-h66k.dts -O arch/arm64/boot/dts/rockchip/rk3568-h66k.dts
-        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/rk3568-h68k.dts -O arch/arm64/boot/dts/rockchip/rk3568-h68k.dts
-        git diff --no-index --output=./patch/kernel/archive/rk35xx-5.10/board-dts-add-h6xk.patch /dev/null arch/arm64/boot/dts/rockchip/rk3568-h6xk.dtsi || ls -l ./patch/kernel/archive/rk35xx-5.10/board-dts-add-h6xk.patch
-        git diff --no-index --output=./patch/kernel/archive/rk35xx-5.10/board-dts-add-h66k.patch /dev/null arch/arm64/boot/dts/rockchip/rk3568-h66k.dts || ls -l ./patch/kernel/archive/rk35xx-5.10/board-dts-add-h66k.patch
-        git diff --no-index --output=./patch/kernel/archive/rk35xx-5.10/board-dts-add-h68k.patch /dev/null arch/arm64/boot/dts/rockchip/rk3568-h68k.dts || ls -l ./patch/kernel/archive/rk35xx-5.10/board-dts-add-h68k.patch
+        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/board-add-hinlink-h6xk-makefile.patch -O patch/kernel/archive/rk35xx-5.10/board-add-hinlink-h6xk-makefile.patch
+        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/rk3568-hinlink-h6xk.dtsi -O arch/arm64/boot/dts/rockchip/rk3568-hinlink-h6xk.dtsi
+        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/rk3568-hinlink-h66k.dts -O arch/arm64/boot/dts/rockchip/rk3568-hinlink-h66k.dts
+        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/rk3568-hinlink-h68k.dts -O arch/arm64/boot/dts/rockchip/rk3568-hinlink-h68k.dts
+        git diff --no-index --output=./patch/kernel/archive/rk35xx-5.10/rk3568-dtsi-add-hinlink-h6xk.patch /dev/null arch/arm64/boot/dts/rockchip/rk3568-hinlink-h6xk.dtsi || ls -l ./patch/kernel/archive/rk35xx-5.10/rk3568-dtsi-add-hinlink-h6xk.patch
+        git diff --no-index --output=./patch/kernel/archive/rk35xx-5.10/board-dts-add-hinlink-h66k.patch /dev/null arch/arm64/boot/dts/rockchip/rk3568-hinlink-h66k.dts || ls -l ./patch/kernel/archive/rk35xx-5.10/board-dts-add-hinlink-h66k.patch
+        git diff --no-index --output=./patch/kernel/archive/rk35xx-5.10/board-dts-add-hinlink-h68k.patch /dev/null arch/arm64/boot/dts/rockchip/rk3568-hinlink-h68k.dts || ls -l ./patch/kernel/archive/rk35xx-5.10/board-dts-add-hinlink-h68k.patch
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/linux-rk35xx-legacy.config -O config/kernel/linux-rk35xx-legacy.config
-        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/h66k.conf -O config/boards/h66k.conf
-        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/h68k.conf -O config/boards/h68k.conf
+        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/hinlink-h66k.conf -O config/boards/hinlink-h66k.conf
+        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/hinlink-h68k.conf -O config/boards/hinlink-h68k.conf
         git status
         docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
         ./compile.sh \
