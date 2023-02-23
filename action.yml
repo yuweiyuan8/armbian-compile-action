@@ -72,6 +72,7 @@ runs:
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/hinlink-h68k.conf -O config/boards/hinlink-h68k.conf
         git status
         docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
+        sed -i "s|/bin/bash||g" lib/functions/host/docker.sh
         ./compile.sh \
         BOARD=${{ inputs.board }} \
         BRANCH=${{ inputs.branch }} \
