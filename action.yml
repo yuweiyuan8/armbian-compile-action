@@ -85,6 +85,7 @@ runs:
         DESKTOP_APPGROUPS_SELECTED=${{ env.desktop_appgroups_selected }} \
         EXPERT=${{ env.expert }} \
         BOARD_FIRMWARE_INSTALL="-full" \
+        SHARE_LOG=yes \
         COMPRESS_OUTPUTIMAGE=sha,gpg,xz
     - name: Upload
       if: inputs.release-id != '' && inputs.github-token != ''
