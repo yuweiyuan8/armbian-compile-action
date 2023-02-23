@@ -82,8 +82,6 @@ runs:
         KERNEL_CONFIGURE=no \
         DESKTOP_ENVIRONMENT=${{ env.desktop-environment }} \
         DESKTOP_ENVIRONMENT_CONFIG_NAME=${{ env.desktop-environment-config-name }} \
-        DESKTOP_APPGROUPS_SELECTED=\"${{ env.desktop_appgroups_selected }}\" \
-        EXPERT=${{ env.expert }} \
         BOARD_FIRMWARE_INSTALL="-full" \
         SHARE_LOG=yes \
         DEBUG=yes \
