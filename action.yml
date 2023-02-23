@@ -86,6 +86,7 @@ runs:
         EXPERT=${{ env.expert }} \
         BOARD_FIRMWARE_INSTALL="-full" \
         SHARE_LOG=yes \
+        DEBUG=yes \
         COMPRESS_OUTPUTIMAGE=sha,gpg,xz
     - name: Upload
       if: inputs.release-id != '' && inputs.github-token != ''
