@@ -88,7 +88,7 @@ runs:
         DESKTOP_APPGROUPS_SELECTED=${{ env.desktop_appgroups_selected }} \
         EXPERT=${{ env.expert }} \
         BOARD_FIRMWARE_INSTALL="-full" \
-        SHARE_LOG=no \
+        SHARE_LOG=yes \
         DEBUG=yes \
         COMPRESS_OUTPUTIMAGE=sha,gpg,xz
     - name: Upload
