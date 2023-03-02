@@ -58,6 +58,7 @@ runs:
         wget https://github.com/amazingfate/armbian-h88k-images/raw/master/h88k.csc -O config/boards/h88k.csc
         cp -r patch/u-boot/legacy/board_rock-5b patch/u-boot/legacy/board_h88k
         wget https://raw.githubusercontent.com/amazingfate/build/rk3588-new-legacy/config/kernel/linux-rockchip-rk3588-legacy.config -O config/kernel/linux-rockchip-rk3588-legacy.config
+        wget https://raw.githubusercontent.com/amazingfate/build/rk3588-new-legacy/config/sources/families/include/rockchip64_common.inc -O config/sources/families/include/rockchip64_common.inc
         rm patch/kernel/rockchip-rk3588-legacy/20*.patch patch/kernel/rockchip-rk3588-legacy/999*.patch
         sed -i "s|radxa/kernel|armbian/linux-rockchip|g" config/sources/families/rockchip-rk3588.conf
         sed -i "s|linux-5.10-gen-rkr3.4|rockchip-5.10|g" config/sources/families/rockchip-rk3588.conf
