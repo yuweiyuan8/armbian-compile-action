@@ -57,7 +57,10 @@ runs:
         git diff --no-index --output=./patch/kernel/rockchip-rk3588-legacy/board-dts-add-h88k.patch /dev/null arch/arm64/boot/dts/rockchip/rk3588-h88k.dts || ls -l ./patch/kernel/rockchip-rk3588-legacy/board-dts-add-h88k.patch
         wget https://github.com/amazingfate/armbian-h88k-images/raw/master/h88k.csc -O config/boards/h88k.csc
         cp -r patch/u-boot/legacy/board_rock-5b patch/u-boot/legacy/board_h88k
-        sed -i "s|# CONFIG_SENSORS_PWM_FAN is not set|CONFIG_SENSORS_PWM_FAN=y|g" config/kernel/linux-rockchip-rk3588-legacy.config
+        wget https://raw.githubusercontent.com/amazingfate/build/rk3588-new-legacy/config/kernel/linux-rockchip-rk3588-legacy.config -O config/kernel/linux-rockchip-rk3588-legacy.config
+        rm patch/kernel/rockchip-rk3588-legacy/20*.patch patch/kernel/rockchip-rk3588-legacy/999*.patch
+        sed -i "s|radxa/kernel|armbian/linux-rockchip|g" config/sources/families/rockchip-rk3588.conf
+        sed -i "s|linux-5.10-gen-rkr3.4|rockchip-5.10|g" config/sources/families/rockchip-rk3588.conf
         sed -i "s|ext4|fat|g" config/boards/rock-5b.wip
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-v6.0.16.patch -O patch/kernel/archive/rk35xx-5.10/backport-6.0.16.patch
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/board-add-hinlink-h6xk-makefile.patch -O patch/kernel/archive/rk35xx-5.10/board-add-hinlink-h6xk-makefile.patch
