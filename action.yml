@@ -70,7 +70,7 @@ runs:
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/hinlink-h66k.conf -O config/boards/hinlink-h66k.conf
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/hinlink-h68k.conf -O config/boards/hinlink-h68k.conf
         source config/boards/${{ inputs.board }}.*
-        if [[ "$BOARDFAMILY" == "rk35xx" ] || [ "$BOARDFAMILY" == "rockchip-rk3588" ]] && [ "${{ inputs.branch }}" == "legacy" ] && [ "${{ inputs.flavor }}" == "ubuntu" ]; then
+        if [[ "$BOARDFAMILY" == "rk35xx" || "$BOARDFAMILY" == "rockchip-rk3588" ]] && [ "${{ inputs.branch }}" == "legacy" ] && [ "${{ inputs.flavor }}" == "ubuntu" ]; then
             mkdir -p config/desktop/jammy/appgroups/rockchip-multimedia/sources/apt/
             wget https://github.com/amazingfate/armbian-compile-action/raw/main/liujianfeng1994.gpg -O config/desktop/jammy/appgroups/rockchip-multimedia/sources/apt/rockchip-multimedia.gpg
             wget https://github.com/amazingfate/armbian-compile-action/raw/main/rockchip-multimedia.source -O config/desktop/jammy/appgroups/rockchip-multimedia/sources/apt/rockchip-multimedia.source
