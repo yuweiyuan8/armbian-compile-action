@@ -75,14 +75,13 @@ runs:
             wget https://github.com/amazingfate/armbian-compile-action/raw/main/liujianfeng1994.gpg -O config/desktop/jammy/appgroups/rockchip-multimedia/sources/apt/rockchip-multimedia.gpg
             wget https://github.com/amazingfate/armbian-compile-action/raw/main/rockchip-multimedia.source -O config/desktop/jammy/appgroups/rockchip-multimedia/sources/apt/rockchip-multimedia.source
             wget https://github.com/amazingfate/armbian-compile-action/raw/main/rockchip-multimedia.packages -O config/desktop/jammy/appgroups/rockchip-multimedia/packages
-            NEW_DESKTOP_APPGROUPS_SELECTED=${{ env.desktop_appgroups_selected }}
-            NEW_DESKTOP_APPGROUPS_SELECTED=\"${NEW_DESKTOP_APPGROUPS_SELECTED}" rockchip-multimedia\""
+            NEW_DESKTOP_APPGROUPS_SELECTED=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia\"
             if [ "$BOARDFAMILY" == "rockchip-rk3588" ]; then
                 mkdir -p config/desktop/jammy/appgroups/panfork-mesa/sources/apt/
                 wget https://github.com/amazingfate/armbian-compile-action/raw/main/liujianfeng1994.gpg -O config/desktop/jammy/appgroups/panfork-mesa/sources/apt/panfork-mesa.gpg
                 wget https://github.com/amazingfate/armbian-compile-action/raw/main/panfork-mesa.source -O config/desktop/jammy/appgroups/panfork-mesa/sources/apt/panfork-mesa.source
                 wget https://github.com/amazingfate/armbian-compile-action/raw/main/panfork-mesa.packages -O config/desktop/jammy/appgroups/panfork-mesa/packages
-                NEW_DESKTOP_APPGROUPS_SELECTED=\"${NEW_DESKTOP_APPGROUPS_SELECTED}" panfork-mesa\""
+                NEW_DESKTOP_APPGROUPS_SELECTED=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia panfork-mesa\"
             fi
         else
             NEW_DESKTOP_APPGROUPS_SELECTED=${{ env.desktop_appgroups_selected }}
