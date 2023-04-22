@@ -62,9 +62,6 @@ runs:
         cd ./build
         touch .ignore_changes
         mkdir -p arch/arm64/boot/dts/rockchip/
-        wget https://github.com/amazingfate/armbian-h88k-images/raw/master/hinlink-h88k.csc -O config/boards/hinlink-h88k.csc
-        cp -r patch/u-boot/legacy/board_rock-5b patch/u-boot/legacy/board_hinlink-h88k
-        wget https://github.com/amazingfate/armbian-h88k-images/raw/master/uboot-hinlink-h88k-config.patch -O patch/u-boot/legacy/board_hinlink-h88k/uboot-hinlink-h88k-config.patch
         sed -i "s|ext4|fat|g" config/boards/rock-5b.wip
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-v6.0.16.patch -O patch/kernel/archive/rk35xx-5.10/backport-6.0.16.patch
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/board-add-hinlink-h6xk-makefile.patch -O patch/kernel/archive/rk35xx-5.10/board-add-hinlink-h6xk-makefile.patch
