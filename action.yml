@@ -62,7 +62,7 @@ runs:
         cd ./build
         touch .ignore_changes
         mkdir -p arch/arm64/boot/dts/rockchip/
-        sed -i "s|ext4|fat|g" config/boards/rock-5b.wip
+        sed -i "s|ext4|fat|g" config/boards/rock-5b.conf
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-v6.0.16.patch -O patch/kernel/archive/rk35xx-5.10/backport-6.0.16.patch
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/board-add-hinlink-h6xk-makefile.patch -O patch/kernel/archive/rk35xx-5.10/board-add-hinlink-h6xk-makefile.patch
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/rk3568-hinlink-h6xk.dtsi -O arch/arm64/boot/dts/rockchip/rk3568-hinlink-h6xk.dtsi
