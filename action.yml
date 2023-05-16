@@ -47,7 +47,7 @@ runs:
           if [ "${{ inputs.branch }}" == "legacy" ]; then
             if [[ "${{ inputs.board }}" == "rock-3a" || "${{ inputs.board }}" == "hinlink-h66k" || "${{ inputs.board }}" == "hinlink-h68k" ]]; then
               echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia\"" >> $GITHUB_ENV
-            elif [[ "${{ inputs.board }}" == "rock-5b" || "${{ inputs.board }}" == "hinlink-h88k" || "${{ inputs.board }}" == "orangepi5" ]] || "${{ inputs.board }}" == "rock-5a" ]]; then
+            elif [[ "${{ inputs.board }}" == "rock-5b" || "${{ inputs.board }}" == "hinlink-h88k" || "${{ inputs.board }}" == "orangepi5" || "${{ inputs.board }}" == "rock-5a" ]]; then
               echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia panfork-mesa\"" >> $GITHUB_ENV
             else
               echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
