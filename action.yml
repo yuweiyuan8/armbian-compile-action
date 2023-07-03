@@ -99,21 +99,36 @@ runs:
         wget https://github.com/amazingfate/armbian-compile-action/raw/main/panfork-mesa.packages -O config/desktop/jammy/appgroups/panfork-mesa/packages
         git status
         docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
-        ./compile.sh \
-        BOARD=${{ inputs.board }} \
-        BRANCH=${{ inputs.branch }} \
-        RELEASE=${{ env.release }} \
-        BUILD_MINIMAL=${{ env.build-minimal }} \
-        BUILD_DESKTOP=${{ env.build-desktop }} \
-        KERNEL_CONFIGURE=no \
-        DESKTOP_ENVIRONMENT=${{ env.desktop-environment }} \
-        DESKTOP_ENVIRONMENT_CONFIG_NAME=${{ env.desktop-environment-config-name }} \
-        DESKTOP_APPGROUPS_SELECTED=${{ env.desktop_appgroups_selected }} \
-        EXPERT=${{ env.expert }} \
-        BOARD_FIRMWARE_INSTALL="-full" \
-        SHARE_LOG=yes \
-        DEBUG=yes \
-        COMPRESS_OUTPUTIMAGE=sha,gpg,xz
+        if [ ${{ inputs.flavor }} == "cli" ];then
+            ./compile.sh \
+            BOARD=${{ inputs.board }} \
+            BRANCH=${{ inputs.branch }} \
+            RELEASE=${{ env.release }} \
+            BUILD_MINIMAL=${{ env.build-minimal }} \
+            BUILD_DESKTOP=${{ env.build-desktop }} \
+            KERNEL_CONFIGURE=no \
+            EXPERT=${{ env.expert }} \
+            BOARD_FIRMWARE_INSTALL="-full" \
+            SHARE_LOG=yes \
+            DEBUG=yes \
+            COMPRESS_OUTPUTIMAGE=sha,gpg,xz
+        else
+            ./compile.sh \
+            BOARD=${{ inputs.board }} \
+            BRANCH=${{ inputs.branch }} \
+            RELEASE=${{ env.release }} \
+            BUILD_MINIMAL=${{ env.build-minimal }} \
+            BUILD_DESKTOP=${{ env.build-desktop }} \
+            KERNEL_CONFIGURE=no \
+            DESKTOP_ENVIRONMENT=${{ env.desktop-environment }} \
+            DESKTOP_ENVIRONMENT_CONFIG_NAME=${{ env.desktop-environment-config-name }} \
+            DESKTOP_APPGROUPS_SELECTED=${{ env.desktop_appgroups_selected }} \
+            EXPERT=${{ env.expert }} \
+            BOARD_FIRMWARE_INSTALL="-full" \
+            SHARE_LOG=yes \
+            DEBUG=yes \
+            COMPRESS_OUTPUTIMAGE=sha,gpg,xz
+        fi
     - name: Upload
       if: inputs.release-id != '' && inputs.github-token != ''
       uses: xresloader/upload-to-github-release@v1
