@@ -84,7 +84,7 @@ runs:
         sed -i "s|ext4|fat|g" config/boards/rock-5b.conf
         mkdir -p patch/kernel/archive/rk35xx-5.10
         if [ ${{ inputs.board }} == "hinlink-h68k" ]; then
-            wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-v6.0.16.patch -O patch/kernel/archive/rk35xx-5.10/backport-6.0.16.patch
+            wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-v6.1.39.patch -O patch/kernel/archive/rk35xx-5.10/backport-v6.1.39.patch
             wget https://github.com/amazingfate/armbian-h68k-images/raw/master/linux-rk35xx-legacy.config -O config/kernel/linux-rk35xx-legacy.config
         fi
         wget https://github.com/amazingfate/armbian-h68k-images/raw/master/hinlink-h66k.conf -O config/boards/hinlink-h66k.conf
