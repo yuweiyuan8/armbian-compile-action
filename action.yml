@@ -138,6 +138,7 @@ runs:
             COMPRESS_OUTPUTIMAGE=sha,gpg
             cp ../armbian-xiaomi-elish/create-seperated-image.sh output/images
             cp ../armbian-xiaomi-elish/mkbootimg.py output/images
+            sudo du -sh cache && sudo rm -rf cache && df -h
             cd output/images && ./create-seperated-image.sh Armbian*.img
         else
             ./compile.sh \
