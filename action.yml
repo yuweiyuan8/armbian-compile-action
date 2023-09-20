@@ -15,7 +15,7 @@ runs:
     - name: Get more space
       uses: easimon/maximize-build-space@master
       with:
-        root-reserve-mb: 10240
+        root-reserve-mb: 20480
         temp-reserve-mb: 4096
         swap-size-mb: 1024
         remove-dotnet: 'true'
