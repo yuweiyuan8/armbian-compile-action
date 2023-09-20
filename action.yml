@@ -135,6 +135,7 @@ runs:
             BOARD_FIRMWARE_INSTALL="-full" \
             SHARE_LOG=yes \
             DEBUG=yes \
+            KERNEL_GIT=shallow \
             COMPRESS_OUTPUTIMAGE=sha,gpg
             cp ../armbian-xiaomi-elish/create-seperated-image.sh output/images
             cp ../armbian-xiaomi-elish/mkbootimg.py output/images
