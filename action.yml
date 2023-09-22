@@ -106,6 +106,7 @@ runs:
         cp ../armbian-xiaomi-elish/xiaomi-elish.conf config/boards/
         cp ../armbian-xiaomi-elish/qcom-abl.conf config/sources/families/
         cp -r ../armbian-xiaomi-elish/bsp_xiaomi-elish packages/bsp/xiaomi-elish
+        cp -r ../armbian-xiaomi-elish/kernel_patches/arm64-sm8250 patch/kernel/
         git status
         docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
         if [ ${{ inputs.flavor }} == "cli" ];then
