@@ -104,6 +104,7 @@ runs:
         git clone --depth 1 https://github.com/amazingfate/armbian-xiaomi-elish.git ../armbian-xiaomi-elish
         cp ../armbian-xiaomi-elish/linux-arm64-sm8250.config config/kernel/
         cp ../armbian-xiaomi-elish/xiaomi-elish.conf config/boards/
+        cp ../armbian-xiaomi-elish/qcom-abl.conf config/sources/families/
         cp -r ../armbian-xiaomi-elish/bsp_xiaomi-elish packages/bsp/xiaomi-elish
         git status
         docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
