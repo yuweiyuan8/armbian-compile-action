@@ -53,6 +53,8 @@ runs:
               echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia\"" >> $GITHUB_ENV
             elif [[ "${{ inputs.board }}" == "rock-5b" || "${{ inputs.board }}" == "hinlink-h88k" || "${{ inputs.board }}" == "orangepi5" || "${{ inputs.board }}" == "rock-5a" ]]; then
               echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia panfork-mesa\"" >> $GITHUB_ENV
+            elif [[ "${{ inputs.board }}" == "xiaomi-elish"]]; then
+              echo "desktop_appgroups_selected=\"3dsupport desktop_tools editors multimedia office remote_desktop\"" >> $GITHUB_ENV
             else
               echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
             fi
@@ -101,12 +103,6 @@ runs:
         wget https://github.com/amazingfate/armbian-compile-action/raw/main/liujianfeng1994.gpg -O config/desktop/jammy/appgroups/panfork-mesa/sources/apt/panfork-mesa.gpg
         wget https://github.com/amazingfate/armbian-compile-action/raw/main/panfork-mesa.source -O config/desktop/jammy/appgroups/panfork-mesa/sources/apt/panfork-mesa.source
         wget https://github.com/amazingfate/armbian-compile-action/raw/main/panfork-mesa.packages -O config/desktop/jammy/appgroups/panfork-mesa/packages
-        git clone --depth 1 https://github.com/amazingfate/armbian-xiaomi-elish.git ../armbian-xiaomi-elish
-        cp ../armbian-xiaomi-elish/linux-arm64-sm8250.config config/kernel/
-        cp ../armbian-xiaomi-elish/xiaomi-elish.conf config/boards/
-        cp ../armbian-xiaomi-elish/qcom-abl.conf config/sources/families/
-        cp -r ../armbian-xiaomi-elish/bsp_xiaomi-elish packages/bsp/xiaomi-elish
-        cp -r ../armbian-xiaomi-elish/kernel_patches/arm64-sm8250 patch/kernel/
         git status
         docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
         if [ ${{ inputs.flavor }} == "cli" ];then
@@ -122,27 +118,6 @@ runs:
             SHARE_LOG=yes \
             DEBUG=yes \
             COMPRESS_OUTPUTIMAGE=sha,gpg,xz
-        elif [ ${{ inputs.board }} == "xiaomi-elish" ];then
-            ./compile.sh \
-            BOARD=${{ inputs.board }} \
-            BRANCH=${{ inputs.branch }} \
-            RELEASE=${{ env.release }} \
-            BUILD_MINIMAL=${{ env.build-minimal }} \
-            BUILD_DESKTOP=${{ env.build-desktop }} \
-            KERNEL_CONFIGURE=no \
-            DESKTOP_ENVIRONMENT=${{ env.desktop-environment }} \
-            DESKTOP_ENVIRONMENT_CONFIG_NAME=${{ env.desktop-environment-config-name }} \
-            DESKTOP_APPGROUPS_SELECTED=${{ env.desktop_appgroups_selected }} \
-            EXPERT=${{ env.expert }} \
-            BOARD_FIRMWARE_INSTALL="-full" \
-            SHARE_LOG=yes \
-            DEBUG=yes \
-            KERNEL_GIT=shallow \
-            COMPRESS_OUTPUTIMAGE=sha,gpg
-            cp ../armbian-xiaomi-elish/create-seperated-image.sh output/images
-            cp ../armbian-xiaomi-elish/mkbootimg.py output/images
-            sudo du -sh cache && sudo rm -rf cache && df -h
-            cd output/images && ./create-seperated-image.sh Armbian*.img
         else
             ./compile.sh \
             BOARD=${{ inputs.board }} \
@@ -158,6 +133,7 @@ runs:
             BOARD_FIRMWARE_INSTALL="-full" \
             SHARE_LOG=yes \
             DEBUG=yes \
+            KERNEL_GIT=shallow \
             COMPRESS_OUTPUTIMAGE=sha,gpg,xz
         fi
     - name: Upload
