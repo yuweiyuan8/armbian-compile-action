@@ -103,7 +103,7 @@ runs:
         wget https://github.com/amazingfate/armbian-compile-action/raw/main/liujianfeng1994.gpg -O config/desktop/jammy/appgroups/panfork-mesa/sources/apt/panfork-mesa.gpg
         wget https://github.com/amazingfate/armbian-compile-action/raw/main/panfork-mesa.source -O config/desktop/jammy/appgroups/panfork-mesa/sources/apt/panfork-mesa.source
         wget https://github.com/amazingfate/armbian-compile-action/raw/main/panfork-mesa.packages -O config/desktop/jammy/appgroups/panfork-mesa/packages
-        sed -i "s|() {|() {\nrm -rf \${SRC}/cache/*||true\n|g" extensions/image-output-abl.sh
+        sed -i "s|() {|() {\nrm -rf \${SRC}/cache/*\|\|true\n|g" extensions/image-output-abl.sh
         git status
         docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
         if [ ${{ inputs.flavor }} == "cli" ];then
