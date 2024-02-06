@@ -57,6 +57,9 @@ runs:
               echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
             fi
           else
+             if [[ "${{ inputs.board }}" == "xiaomi-lmi" ]]; then
+              echo "desktop_appgroups_selected=\"3dsupport desktop_tools\"" >> $GITHUB_ENV
+            else
             if [[ "${{ inputs.board }}" == "xiaomi-elish" ]]; then
               echo "desktop_appgroups_selected=\"3dsupport desktop_tools editors multimedia office remote_desktop\"" >> $GITHUB_ENV
             else
