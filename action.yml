@@ -42,46 +42,22 @@ runs:
           echo "expert=no" >> $GITHUB_ENV
         elif [ ${{ inputs.flavor }} == "ubuntu" ]
         then
-          echo "release=jammy" >> $GITHUB_ENV
+          echo "release=noble" >> $GITHUB_ENV
           echo "build-minimal=no" >> $GITHUB_ENV
           echo "build-desktop=yes" >> $GITHUB_ENV
           echo "desktop-environment=gnome" >> $GITHUB_ENV
           echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
           echo "expert=yes" >> $GITHUB_ENV
-          if [ "${{ inputs.branch }}" == "legacy" ]; then
-            if [[ "${{ inputs.board }}" == "rock-3a" || "${{ inputs.board }}" == "hinlink-h66k" || "${{ inputs.board }}" == "hinlink-h68k" ]]; then
-              echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia\"" >> $GITHUB_ENV
-            elif [[ "${{ inputs.board }}" == "rock-5b" || "${{ inputs.board }}" == "hinlink-h88k" || "${{ inputs.board }}" == "orangepi5" || "${{ inputs.board }}" == "rock-5a" ]]; then
-              echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia panfork-mesa\"" >> $GITHUB_ENV
-            else
-              echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
-            fi
-          else
-            if [[ "${{ inputs.board }}" == "xiaomi-elish" ]]; then
-              echo "desktop_appgroups_selected=\"3dsupport desktop_tools editors multimedia office remote_desktop\"" >> $GITHUB_ENV
-            else
-              echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
-            fi
-          fi
+          echo "desktop_appgroups_selected=\"browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
         elif [ ${{ inputs.flavor }} == "cli" ]
         then
-          echo "release=jammy" >> $GITHUB_ENV
+          echo "release=noble" >> $GITHUB_ENV
           echo "build-minimal=no" >> $GITHUB_ENV
           echo "build-desktop=no" >> $GITHUB_ENV
           echo "desktop-environment=gnome" >> $GITHUB_ENV
           echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
           echo "expert=yes" >> $GITHUB_ENV
-          if [ "${{ inputs.branch }}" == "legacy" ]; then
-            if [[ "${{ inputs.board }}" == "rock-3a" || "${{ inputs.board }}" == "hinlink-h66k" || "${{ inputs.board }}" == "hinlink-h68k" ]]; then
-              echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia\"" >> $GITHUB_ENV
-            elif [[ "${{ inputs.board }}" == "rock-5b" || "${{ inputs.board }}" == "hinlink-h88k" || "${{ inputs.board }}" == "orangepi5" || "${{ inputs.board }}" == "rock-5a" ]]; then
-              echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia panfork-mesa\"" >> $GITHUB_ENV
-            else
-              echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
-            fi
-          else
-            echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
-          fi
+          echo "desktop_appgroups_selected=\"browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
         fi
     - name: Build
       shell: bash
@@ -89,22 +65,6 @@ runs:
         cd ./build
         touch .ignore_changes
         mkdir -p arch/arm64/boot/dts/rockchip/
-        sed -i "s|ext4|fat|g" config/boards/rock-5b.conf
-        mkdir -p patch/kernel/archive/rk35xx-5.10
-        if [ ${{ inputs.board }} == "hinlink-h68k" ]; then
-            wget https://github.com/amazingfate/armbian-h68k-images/raw/master/backport-v6.1.39.patch -O patch/kernel/archive/rk35xx-5.10/backport-v6.1.39.patch
-            wget https://github.com/amazingfate/armbian-h68k-images/raw/master/linux-rk35xx-legacy.config -O config/kernel/linux-rk35xx-legacy.config
-        fi
-        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/hinlink-h66k.conf -O config/boards/hinlink-h66k.conf
-        wget https://github.com/amazingfate/armbian-h68k-images/raw/master/hinlink-h68k.conf -O config/boards/hinlink-h68k.conf
-        mkdir -p config/desktop/jammy/appgroups/rockchip-multimedia/sources/apt/
-        wget https://github.com/amazingfate/armbian-compile-action/raw/main/liujianfeng1994.gpg -O config/desktop/jammy/appgroups/rockchip-multimedia/sources/apt/rockchip-multimedia.gpg
-        wget https://github.com/amazingfate/armbian-compile-action/raw/main/rockchip-multimedia.source -O config/desktop/jammy/appgroups/rockchip-multimedia/sources/apt/rockchip-multimedia.source
-        wget https://github.com/amazingfate/armbian-compile-action/raw/main/rockchip-multimedia.packages -O config/desktop/jammy/appgroups/rockchip-multimedia/packages
-        mkdir -p config/desktop/jammy/appgroups/panfork-mesa/sources/apt/
-        wget https://github.com/amazingfate/armbian-compile-action/raw/main/liujianfeng1994.gpg -O config/desktop/jammy/appgroups/panfork-mesa/sources/apt/panfork-mesa.gpg
-        wget https://github.com/amazingfate/armbian-compile-action/raw/main/panfork-mesa.source -O config/desktop/jammy/appgroups/panfork-mesa/sources/apt/panfork-mesa.source
-        wget https://github.com/amazingfate/armbian-compile-action/raw/main/panfork-mesa.packages -O config/desktop/jammy/appgroups/panfork-mesa/packages
         sed -i "s|() {|() {\ndf -h \&\& du -sh \${SRC}/* \&\& du -sh \${SRC}/cache/* \&\& rm -rf \${SRC}/cache/sources/aptcache/* \${SRC}/cache/sources/linux-kernel-worktree/* \${SRC}/cache/sources/rootfs/*\n|g" extensions/image-output-abl.sh
         git status
         docker pull ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
