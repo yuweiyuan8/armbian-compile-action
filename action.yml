@@ -97,6 +97,7 @@ runs:
             SHARE_LOG=yes \
             DEBUG=yes \
             KERNEL_GIT=shallow \
+            IMAGE_XZ_COMPRESSION_RATIO=9 \
             COMPRESS_OUTPUTIMAGE=sha,gpg,xz
         fi
     - name: Upload
