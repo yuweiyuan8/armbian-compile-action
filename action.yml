@@ -37,7 +37,7 @@ runs:
           echo "release=sid" >> $GITHUB_ENV
           echo "build-minimal=no" >> $GITHUB_ENV
           echo "build-desktop=yes" >> $GITHUB_ENV
-          echo "desktop-environment=xfce" >> $GITHUB_ENV
+          echo "desktop-environment=gnome" >> $GITHUB_ENV
           echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
           echo "expert=no" >> $GITHUB_ENV
         elif [ ${{ inputs.flavor }} == "ubuntu" ]
@@ -57,10 +57,10 @@ runs:
               echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
             fi
           else
-            if [[ "${{ inputs.board }}" == "xiaomi-elish" ]]; then
+            if [[ "${{ inputs.board }}" == "xiaomi-lmi" ]]; then
               echo "desktop_appgroups_selected=\"3dsupport desktop_tools editors multimedia office remote_desktop\"" >> $GITHUB_ENV
             else
-              echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
+              echo "desktop_appgroups_selected=\"3dsupport browsers\"" >> $GITHUB_ENV
             fi
           fi
         elif [ ${{ inputs.flavor }} == "cli" ]
@@ -68,7 +68,7 @@ runs:
           echo "release=jammy" >> $GITHUB_ENV
           echo "build-minimal=no" >> $GITHUB_ENV
           echo "build-desktop=no" >> $GITHUB_ENV
-          echo "desktop-environment=xfce" >> $GITHUB_ENV
+          echo "desktop-environment=gnome" >> $GITHUB_ENV
           echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
           echo "expert=yes" >> $GITHUB_ENV
           if [ "${{ inputs.branch }}" == "legacy" ]; then
