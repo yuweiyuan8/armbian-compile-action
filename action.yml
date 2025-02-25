@@ -42,10 +42,10 @@ runs:
           echo "expert=no" >> $GITHUB_ENV
         elif [ ${{ inputs.flavor }} == "ubuntu" ]
         then
-          echo "release=jammy" >> $GITHUB_ENV
-          echo "build-minimal=no" >> $GITHUB_ENV
-          echo "build-desktop=yes" >> $GITHUB_ENV
-          echo "desktop-environment=xfce" >> $GITHUB_ENV
+          echo "release=noble" >> $GITHUB_ENV
+          echo "build-minimal=yes" >> $GITHUB_ENV
+          echo "build-desktop=no" >> $GITHUB_ENV
+          echo "desktop-environment=gnome" >> $GITHUB_ENV
           echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
           echo "expert=yes" >> $GITHUB_ENV
           if [ "${{ inputs.branch }}" == "legacy" ]; then
@@ -65,7 +65,7 @@ runs:
           fi
         elif [ ${{ inputs.flavor }} == "cli" ]
         then
-          echo "release=jammy" >> $GITHUB_ENV
+          echo "release=noble" >> $GITHUB_ENV
           echo "build-minimal=no" >> $GITHUB_ENV
           echo "build-desktop=no" >> $GITHUB_ENV
           echo "desktop-environment=gnome" >> $GITHUB_ENV
