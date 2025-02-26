@@ -43,11 +43,11 @@ runs:
         elif [ ${{ inputs.flavor }} == "ubuntu" ]
         then
           echo "release=noble" >> $GITHUB_ENV
-          echo "build-minimal=yes" >> $GITHUB_ENV
-          echo "build-desktop=no" >> $GITHUB_ENV
+          echo "build-minimal=no" >> $GITHUB_ENV
+          echo "build-desktop=yes" >> $GITHUB_ENV
           echo "desktop-environment=gnome" >> $GITHUB_ENV
           echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
-          echo "expert=yes" >> $GITHUB_ENV
+          echo "expert=no" >> $GITHUB_ENV
           if [ "${{ inputs.branch }}" == "legacy" ]; then
             if [[ "${{ inputs.board }}" == "rock-3a" || "${{ inputs.board }}" == "hinlink-h66k" || "${{ inputs.board }}" == "hinlink-h68k" ]]; then
               echo "desktop_appgroups_selected=\"3dsupport browsers chat desktop_tools editors email internet multimedia office programming remote_desktop rockchip-multimedia\"" >> $GITHUB_ENV
