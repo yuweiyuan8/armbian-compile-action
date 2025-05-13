@@ -26,7 +26,7 @@ runs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        repository: yuweiyuan8/armbian-build
+        repository: yuweiyuan8/build
         ref: main
         path: build
     - name: Set env
