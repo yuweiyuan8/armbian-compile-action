@@ -57,7 +57,7 @@ runs:
           echo "desktop-environment=gnome" >> $GITHUB_ENV
           echo "desktop-environment-config-name=config_base" >> $GITHUB_ENV
           echo "expert=yes" >> $GITHUB_ENV
-          echo "desktop_appgroups_selected=\"browsers chat desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
+          echo "desktop_appgroups_selected=\"desktop_tools editors email internet multimedia office programming remote_desktop\"" >> $GITHUB_ENV
         fi
     - name: Build
       shell: bash
